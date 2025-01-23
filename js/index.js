@@ -1,94 +1,3 @@
-// ----------------------------------------
-
-const moth_array = [
-  {
-    val: "01",
-    name: "Jan",
-  },
-  {
-    val: "02",
-    name: "Feb",
-  },
-  {
-    val: "03",
-    name: "Mar",
-  },
-  {
-    val: "04",
-    name: "Apr",
-  },
-  {
-    val: "05",
-    name: "May",
-  },
-  {
-    val: "06",
-    name: "Jun",
-  },
-  {
-    val: "07",
-    name: "Jul",
-  },
-  {
-    val: "08",
-    name: "Aug",
-  },
-  {
-    val: "09",
-    name: "Sep",
-  },
-  {
-    val: "10",
-    name: "Oct",
-  },
-  {
-    val: "11",
-    name: "Nov",
-  },
-  {
-    val: "12",
-    name: "Dec",
-  },
-];
-// -------------------------------------
-const year_input = document.getElementById("year");
-const month_input = document.getElementById("month");
-const date_input = document.getElementById("date");
-// -------------------------------------------------------------
-for (let i = 1900; i <= 2100; i++) {
-  const opt = document.createElement("option");
-  const currentYear = new Date().getFullYear();
-  opt.value = i;
-  opt.innerHTML = i;
-  if (i === currentYear) {
-    opt.selected = true;
-  }
-  year_input.appendChild(opt);
-}
-for (let i = 1; i <= 31; i++) {
-  const opt = document.createElement("option");
-  const currendate = new Date().getDate();
-  const num = i.toString().length === 1 ? `0${i}` : i;
-  opt.value = num;
-  opt.innerHTML = num;
-  if (i === currendate) {
-    opt.selected = true;
-  }
-  date_input.appendChild(opt);
-}
-for (let i = 0; i < 12; i++) {
-  const opt = document.createElement("option");
-  const currentMonth = new Date().getDate();
-  const _m = moth_array[i];
-  opt.value = _m.val;
-  opt.innerHTML = _m.name;
-  if (i === currentMonth) {
-    opt.selected = true;
-  }
-  month_input.appendChild(opt);
-}
-
-// ------------------------------------------------------------------
 var MPLNT = [
   "စနေ",
   "တနင်္ဂနွေ",
@@ -440,13 +349,6 @@ function getAge(dateString) {
   }
   return age;
 }
-// --------------------------------------------------------------------------------------------
-function date_value() {
-  let _year = year_input.value;
-  let _month = month_input.value;
-  let _date = date_input.value;
-  return `${_year}-${_month}-${_date}`;
-}
 var docArray = [
   document.getElementById("mb-1"),
   document.getElementById("mb-2"),
@@ -458,7 +360,8 @@ var docArray = [
 ];
 // ----------------------------------
 function mahabote() {
-  const dateValue = new Date(date_value());
+  var _dv = `${year_input.value}-${month_input.value}-${date_input.value}`;
+  const dateValue = new Date(_dv);
   const y = dateValue.getFullYear();
   const m = dateValue.getMonth() + 1;
   const d = dateValue.getDate();
@@ -489,7 +392,7 @@ function mahabote() {
 
   var mmb = [a, ...b, ...c];
   //   ------------------------------------------------------
-  var age = getAge(date_value());
+  var age = getAge(_dv);
   var aa = joage.find((x) => x.ak === wdn);
   var _id = aa.id;
   var bb = joage.filter((x) => x.id > _id);
@@ -556,33 +459,4 @@ const clear_btn = document.getElementById("clear-btn");
 datetime_btn.addEventListener("click", mahabote);
 clear_btn.addEventListener("click", clearDiv);
 
-var _themevar = "colorSchema";
-var systemTheme = window.matchMedia("(prefers-color-scheme: dark)").matches
-  ? "dark"
-  : "light";
-var themeBtn = document.getElementById("theme");
-var _el = document.querySelector("html");
-
-function getLocalTheme() {
-  return localStorage.getItem(_themevar);
-}
-
-function applyTheme(theme) {
-  _el.setAttribute("data-theme", theme);
-  localStorage.setItem(_themevar, theme);
-}
-
-// Apply the theme on page load
-window.addEventListener("load", function () {
-  var local_theme = getLocalTheme();
-  var _theme = local_theme !== null ? local_theme : systemTheme;
-  applyTheme(_theme);
-});
-
-// Listen for changes on the theme selector
-themeBtn.addEventListener("click", function (e) {
-  e.preventDefault();
-  var local_theme = getLocalTheme();
-  var theme = local_theme === "dark" ? "light" : "dark";
-  applyTheme(theme);
-});
+console.log(year_input.value);
