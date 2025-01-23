@@ -117,9 +117,20 @@
           </div>
         </div>
       </div>
+      <footer style="padding: 10px">
+        <p
+          style="font-family: monospace; text-align: center; font-weight: bold"
+          id="fp"
+        ></p>
+      </footer>
     </main>
     <script src="js/doc.js"></script>
     <script src="js/index.js"></script>
     <script src="js/theme.js"></script>
+    <script>
+      var fp = document.getElementById("fp");
+      var year = new Date().getFullYear();
+      fp.innerHTML = ` ©${year} phothinmg.github.io`;
+    </script>
   </body>
 </html>
